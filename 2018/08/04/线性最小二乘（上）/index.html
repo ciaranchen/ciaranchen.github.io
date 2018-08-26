@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>线性最小二乘（上） | Ciaran's Gondolin</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script><!-- hexo-inject:begin --><!-- hexo-inject:end -->var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '264aaaa76ee702a5b65385936f19abeb';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">线性最小二乘（上）</h1><a id="logo" href="/.">Ciaran's Gondolin</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">线性最小二乘（上）</h1><div class="post-meta">Aug 4, 2018<span> | </span><span class="category"><a href="/categories/数学/">数学</a></span></div><div class="post-content"><p>介绍一下如何求解最小二乘法问题。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><a id="more"></a>
+<h1 id="线性最小二乘"><a href="#线性最小二乘" class="headerlink" title="线性最小二乘"></a>线性最小二乘</h1><p>介绍一下如何求解最小二乘法问题。于是查看了一下Numpy中是如何求解最小二乘法问题的，也即<code>numpy.polyfit</code>函数的代码，一路追下来之后，发现最终使用了LAPACK的ZGELSD方法。它们之间的调用顺序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numpy.polyfit -&gt; numpy.lstsq -&gt; numpy.linalg.lapack_lite.zgelsd</span><br></pre></td></tr></table></figure>
+<p>而实际上，在LAPACK中，存在四种求取实数最小二乘法的方式：</p>
+<ul>
+<li>使用 QR分解 或 LR分解 ： <code>ZGELS</code></li>
+<li>使用 完全正交分解 : <code>ZGELSY</code></li>
+<li>使用 SVD : <code>ZGELSS</code> </li>
+<li>使用 分治SVD : <code>ZGELSD</code></li>
+</ul>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>首先让我们来简单描述一下问题。我们需要解的是这样一个方程：</p>
+<script type="math/tex; mode=display">
+Ax = b</script><p>在这个式子中，我们可以认为$A$是一个$m\times n$的矩阵，$x$是一个$n\times 1$的矩阵，那么$b$就是一个 $m\times 1$的矩阵了。</p>
+<p>我们期望根据给出的一组A和b，求出相应的x。</p>
+<ul>
+<li>对于$m = n$的情况。方程有唯一的解，也就是 $x = inv(A) * b$。（要求A非奇异）</li>
+<li>对于$m &gt; n$的情况。称为超定问题。此时不存在解。</li>
+<li>对于$m &lt; n$的情况，称为负定问题</li>
+</ul>
+<p>我们现在所要面临的就是一个超定问题，由于原方程可以理解为用A的列向量来线性地表示b，而对于超定问题，b根本不在A的列向量张成的线性空间中，则这个方程根本没有办法获得精确解，在这时我们就需要求得最小二乘解，也即求使得误差$ J = \sum_{i=1}^N{(Ax_i - b)^2} $ 最小的$x$。因为2-范数$ |x|_2 = \sqrt{\sum_{i=1}^N{x_i^2} }$，所以我们的求解目标常常写作：</p>
+<script type="math/tex; mode=display">
+min_x\|Ax-b\|_2^2</script><p>其实也就是解上面这个式子，得到的结果称为最小二乘解。</p>
+<p>最主要的问题就在于解决不同维度矩阵相乘除的问题。</p>
+<h2 id="基本解法"><a href="#基本解法" class="headerlink" title="基本解法"></a>基本解法</h2><p>最初的想法肯定是左右同时乘除一个矩阵使得某一边成为方阵可以进行求逆处理：</p>
+<script type="math/tex; mode=display">
+A^TAx = A^Tb \\
+x = inv(A^TA)*A^Tb</script><p>我们可以照着这个用Python写一下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = np.mat(<span class="string">"[1,1; 2,0; 0,2]"</span>)</span><br><span class="line">x = np.mat(<span class="string">"[2;3]"</span>)</span><br><span class="line">b = A*x</span><br><span class="line"></span><br><span class="line">xp = (A.transpose() * A).I * A.transpose() * b</span><br><span class="line">print(xp - x)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[[5 1]</span><br><span class="line">    [1 5]]</span><br><span class="line">[[4.4408921e-16]</span><br><span class="line">    [0.0000000e+00]]</span><br></pre></td></tr></table></figure>
+<p>上面代码的结果应该是两个小于1e-15的数字，这样说明在这个程序中我们的结果还算比较好。</p>
+<p>但是这种直接通过$A^TA$的方式求解问题的解法有很大的不稳定性。（我们可以随便换换A和x，就能看到结果的拨动了）</p>
+<h2 id="ZGELS"><a href="#ZGELS" class="headerlink" title="ZGELS"></a>ZGELS</h2><p>这个方法是指使用QR分解求最小二乘解。</p>
+<p>对上面问题中的A进行QR分解：</p>
+<script type="math/tex; mode=display">
+A = QR</script><p>其中Q是一个半正定矩阵，满足 $ Q^TQ = I $，其大小应为 $m\times n$。R是一个 $n \times n$ 的上三角矩阵所以我们可以把原本的式子写成这样:</p>
+<script type="math/tex; mode=display">
+Q^T A x = R x = Q^Tb</script><p>然后： </p>
+<script type="math/tex; mode=display">
+x = inv(R) * Q^T *b</script><p>简单的Python代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">q, r = np.linalg.qr(A)</span><br><span class="line">print(r.I * q.T *b - x)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[-4.4408921e-16]</span><br><span class="line"> [-4.4408921e-16]]</span><br></pre></td></tr></table></figure>
+<h2 id="ZGELSS"><a href="#ZGELSS" class="headerlink" title="ZGELSS"></a>ZGELSS</h2><p>所谓SVD指下面这种分解，将矩阵分成：</p>
+<script type="math/tex; mode=display">
+A = U \Sigma V^H</script><p>其中$ U, V^\star $分别是$m \times m,n \times n$ 的酉矩阵， 而 $\Sigma $是$m\times n$的除了对角线元素外全为0的矩阵。</p>
+<p>为了简便起见我们把矩阵表示为：</p>
+<script type="math/tex; mode=display">
+\Sigma = \left[\begin{matrix} S \\ 0 \end{matrix} \right] \\
+U = \left[ \begin{matrix} U_1, U_2 \end{matrix} \right]</script><p>其中S为 $n \times n$的对角矩阵, $U_1$为 $m\times n$ 的矩阵，$U_2$ 为 $ m \times (m-n)$的矩阵。</p>
+<p>如此我们可以列出这样的式子：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+J &= \|Ax - b\|_2^2 = \left\|U \left[\begin{matrix} S \\ 0 \end{matrix} \right] V^Hx - b \right\|_2^2 \\
+&= \left\|\left[\begin{matrix} S \\ 0 \end{matrix} \right] V^Hx - U^H b \right\|_2^2 \\
+&= \left\|\left[\begin{matrix} SV^Hx \\ 0 \end{matrix} \right] - \left[\begin{matrix} U_1^Hb \\ U_2^Hb \end{matrix} \right] \right \|_2^2 \\
+&= \left\|\left[\begin{matrix} SV^Hx - U_1^Hb \\ -U_2^Hb \end{matrix} \right] \right \|_2^2 \\
+&= \left\|SV^Hx - U_1^Hb\right\|_2^2 + \left\| -U_2^Hb\right\|_2^2 \ge \left\| U_2^Hb\right\|_2^2 
+\end{aligned}</script><p>因为2-范数大于等于0，由上式可以得到误差$J$最小只能为$ \left| U_2^Hb\right|_2^2 $，且仅在：$ \left|SV^Hx - U_1^Hb\right|_2^2 = 0$，也即$ SV^Hx = U_1^Hb$ 时成立。</p>
+<p>可以根据上面求出$x$为：</p>
+<script type="math/tex; mode=display">
+x = \left(SV^H\right)U_1^Hb</script><blockquote>
+<p>这篇博客的<code>MathJax</code>花了我比较多时间来Debug…最后发现少写了一个下划线</p>
+</blockquote>
+</div><div class="tags"><a href="/tags/数值计算/">数值计算</a></div><div class="post-nav"><a class="pre" href="/2018/08/17/PSBC-week3/">PSBC的一周3</a><a class="next" href="/2018/08/03/PSBC-week1/">PSBC的一周 1</a></div><div id="lv-container" data-id="city" data-uid="MTAyMC8zOTIzOS8xNTc2Ng"><script>(function(d, s) {
+   var j, e = d.getElementsByTagName(s)[0];
+   if (typeof LivereTower === 'function') { return; }
+   j = d.createElement(s);
+   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+   j.async = true;
+   e.parentNode.insertBefore(j, e);
+})(document, 'script');
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://blog.ciaran.cn"/></form></div><div class="widget"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="http://blog.ciaran.cn"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/其它/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/扯淡/">扯淡</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数学/">数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编译原理/">编译原理</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/Cygwin/" style="font-size: 15px;">Cygwin</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/闲谈/" style="font-size: 15px;">闲谈</a> <a href="/tags/大数据/" style="font-size: 15px;">大数据</a> <a href="/tags/LaTeX/" style="font-size: 15px;">LaTeX</a> <a href="/tags/lisp/" style="font-size: 15px;">lisp</a> <a href="/tags/source-code/" style="font-size: 15px;">source code</a> <a href="/tags/C-C/" style="font-size: 15px;">C/C++</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/Clojure/" style="font-size: 15px;">Clojure</a> <a href="/tags/代数/" style="font-size: 15px;">代数</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/数模/" style="font-size: 15px;">数模</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/assemble/" style="font-size: 15px;">assemble</a> <a href="/tags/数值计算/" style="font-size: 15px;">数值计算</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/博客历史/">博客历史</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/17/PSBC-week3/">PSBC的一周3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/线性最小二乘（上）/">线性最小二乘（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/03/PSBC-week1/">PSBC的一周 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/13/Distinguishing-coroutines-and-fibers-translated/">区分协程与纤程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/03/decorator/">Python 装饰器复习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/projeuler-ex2-haskell/">Project Euler 第二题 Haskell 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/20/git_early_version2/">git早期版本源码分析2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/19/Babun-pact-mirror/">Babun pact包管理器更换源</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/17/git_early_version1/">git早期版本源码分析1</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://de_licious.gitlab.io/physics_math_fun/" title="de_licious" target="_blank">de_licious</a><ul></ul><a href="http://www.saberismywife.com/" title="SaberDa" target="_blank">SaberDa</a><ul></ul><a href="http://www.stephenzhang.me/" title="StephenZhang" target="_blank">StephenZhang</a><ul></ul><a href="http://blog.boileryao.com/" title="Boiler Yao" target="_blank">Boiler Yao</a><ul></ul><a href="http://hilvcha.github.io/" title="Hilvcha" target="_blank">Hilvcha</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">Ciaran's Gondolin.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
