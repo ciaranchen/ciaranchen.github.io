@@ -7,8 +7,15 @@
     </url>
     
     <url>
+        <loc>http://blog.ciaran.cn/about/</loc>
+        <lastmod>2018-08-26T03:12:14.519Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://blog.ciaran.cn/README.html</loc>
-        <lastmod>2018-08-26T01:49:12.651Z</lastmod>
+        <lastmod>2018-08-26T03:07:24.991Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -23,13 +30,6 @@
     <url>
         <loc>http://blog.ciaran.cn/concurrent-erlang.html</loc>
         <lastmod>2018-08-03T14:34:19.610Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://blog.ciaran.cn/about/</loc>
-        <lastmod>2018-08-03T14:34:19.607Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
