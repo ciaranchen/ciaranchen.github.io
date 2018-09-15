@@ -1,54 +1,23 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Win和Mac上配置SSH | Ciaran's Gondolin</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script><!-- hexo-inject:begin --><!-- hexo-inject:end -->var _hmt = _hmt || [];
+<!DOCTYPE html><html lang="zh-Hans"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>敏感性分析 | Ciaran's Gondolin</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script><!-- hexo-inject:begin --><!-- hexo-inject:end -->var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = 'https://hm.baidu.com/hm.js?' + '264aaaa76ee702a5b65385936f19abeb';
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
   })();
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Win和Mac上配置SSH</h1><a id="logo" href="/.">Ciaran's Gondolin</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Win和Mac上配置SSH</h1><div class="post-meta">May 15, 2017<span> | </span><span class="category"><a href="/categories/其它/">其它</a></span></div><a class="disqus-comment-count" href="/2017/05/15/Win和Mac上配置SSH/#vcomment"><span class="valine-comment-count" data-xid="/2017/05/15/Win和Mac上配置SSH/"></span><span> 条评论</span></a><div class="post-content"><h4 id="关于SSH："><a href="#关于SSH：" class="headerlink" title="关于SSH："></a>关于SSH：</h4><p>Secure Shell， 安全壳协议。专为远程登录和其他网络服务提供安全性的协议。</p>
-<!-- hexo-inject:begin --><!-- hexo-inject:end --><h2 id="Mac上的服务器配置"><a href="#Mac上的服务器配置" class="headerlink" title="Mac上的服务器配置"></a>Mac上的服务器配置</h2><p>系统偏好设置 -&gt; 共享 -&gt; 远程登录</p>
-<p>勾上“远程登录”这个选项即可</p>
-<h2 id="Win上的服务器配置"><a href="#Win上的服务器配置" class="headerlink" title="Win上的服务器配置"></a>Win上的服务器配置</h2><p>下载<a href="http://www.freesshd.com" target="_blank" rel="noopener">freeSSHd</a></p>
-<p>安装完成后进入Server Status界面(选项卡)。可见SSH在运行中，否则点击click here to start it<sup><a href="#fn_1" id="reffn_1">1</a></sup>。</p>
-<p>进入Users界面(选项卡)。添加一个用户，认证方式三选一：</p>
-<ul>
-<li>NT authentication  NT认证</li>
-<li>Password stored as SHA1 hash  使用密码进行登录</li>
-<li>Public key(SSH only)   使用SSH公钥</li>
-</ul>
-<p>然后相应配置好之后。勾选Shell，确定。则已配置完成</p>
-<blockquote id="fn_1">
-<sup>1</sup>. 如果点击仍无效果，请执行以下步骤：<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">敏感性分析</h1><a id="logo" href="/.">Ciaran's Gondolin</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">敏感性分析</h1><div class="post-meta">Sep 15, 2018<span> | </span><span class="category"><a href="/categories/数学/">数学</a></span></div><a class="disqus-comment-count" href="/2018/09/15/敏感性分析/#vcomment"><span class="valine-comment-count" data-xid="/2018/09/15/敏感性分析/"></span><span> 条评论</span></a><div class="post-content"><p>翻译自姐姐的博客。这一篇来自<a href="https://de_licious.gitlab.io/physics_math_fun/2017/12/02/linalg1/" target="_blank" rel="noopener">这里</a>，现在还是标着<code>To be continued</code>的状态。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><a id="more"></a>
+<h1 id="Sensitivity-Analysis"><a href="#Sensitivity-Analysis" class="headerlink" title="Sensitivity Analysis"></a>Sensitivity Analysis</h1><blockquote>
+<p>你知道如何取ODE的微分吗？你会感到惊讶的！</p>
 </blockquote>
-<pre><code>1. 检查有否其他程序在使用端口22
-    netstat -ano | findstr &quot;22&quot;
-2. 找到使用此端口的程序名
-    tasklist | findstr &quot;&lt;上一步找到的进程号&gt;&quot;
-3. 中止此程序
-</code></pre><h2 id="Mac上客户端的配置"><a href="#Mac上客户端的配置" class="headerlink" title="Mac上客户端的配置"></a>Mac上客户端的配置</h2><p>Mac自带ssh协议客户端<sup><a href="#fn_2" id="reffn_2">2</a></sup>。</p>
-<blockquote id="fn_2">
-<sup>2</sup>. 如无则brew install ssh安装<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+<p>什么是常微分方程(ODE)的导数？你也许会感到困惑。一个ODE不是被定义为 $u’=f’(u,t)$ 吗？那么任意一个ODE的积分都应该是 $f$ 啊！当然，这是正确的，但是如果我们在我们的ODE种有参数$p$，我们有$u’=f’(u,p,t)$，然后我们再来考虑这个参数在ODE解中的敏感性会如何？</p>
+<p>说到导数和灵敏度分析，让我们回顾一下多变量函数的导数。当我们有函数$ f:R^n \mapsto R^M$，我们就能得到一个雅可比矩阵。当我们有函数$ f:R^n \mapsto R $，然后我们能得到梯度向量。类似地，我们也可以获得ODE的雅可比矩阵或梯度向量，并把它们分别称作前向灵敏度分析(forward sensitivity analysis)和伴随灵敏度分析(adjoint sensitivity analysis)</p>
+<h2 id="Forward-Sensitivity-Analysis"><a href="#Forward-Sensitivity-Analysis" class="headerlink" title="Forward Sensitivity Analysis"></a>Forward Sensitivity Analysis</h2><p>一般来说，$p$ 和 $u$ 都是向量，所以 $\frac{\partial u}{\partial p}$ 是一个雅可比矩阵。我们有：</p>
+<script type="math/tex; mode=display">
+\frac{d}{dt} \frac{\partial u}{\partial p} = \frac{\partial f}{\partial u} \frac{\partial u}{\partial p} + \frac{\partial f}{\partial p}</script><h2 id="Adjoint-Sensitivity-Analysis"><a href="#Adjoint-Sensitivity-Analysis" class="headerlink" title="Adjoint Sensitivity Analysis"></a>Adjoint Sensitivity Analysis</h2><blockquote>
+<p>To be continued…</p>
 </blockquote>
-<p>直接在终端使用</p>
-<pre><code>ssh &lt;remote username&gt;@&lt;remote address&gt;
-</code></pre><p>一般会问你是否信任该远程连接，然后是否加入缓冲区之类。然后输密码。</p>
-<h2 id="Win上客户端的配置"><a href="#Win上客户端的配置" class="headerlink" title="Win上客户端的配置"></a>Win上客户端的配置</h2><p>下载<a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/" target="_blank" rel="noopener">PuTTY</a>。</p>
-<blockquote>
-<p>上面的东西没什么大用</p>
-<p>主要是虽然主力机是Win，但是常背着Mac出到外面乱跑。有时总会有点尴尬就是明明电脑就背在书包里，但是场合或其他不可描述的原因不好拿出来。总之就觉得有点想希望电脑在包里不拿出来，但是希望在手机上面能直接使用电脑的一些命令(比如写好的脚本啥的)装个逼啥的。</p>
-<p>然后就找了一堆好像更没用的东西…放到这里期望某一天会有用起来</p>
-</blockquote>
-<h2 id="Mac合盖不休眠解决方案"><a href="#Mac合盖不休眠解决方案" class="headerlink" title="Mac合盖不休眠解决方案"></a>Mac合盖不休眠解决方案</h2><p>NoSleep</p>
-<p><a href="www.waerfa.com/nosleep">下载页面</a></p>
-<h2 id="Mac命令行调整网络"><a href="#Mac命令行调整网络" class="headerlink" title="Mac命令行调整网络"></a>Mac命令行调整网络</h2><p>查看网络设备名称</p>
-<pre><code>networksetup -listallhardwareports
-</code></pre><p>扫描可用wifi</p>
-<pre><code>/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan
-</code></pre><p>当然你可以在你的配置文件中加上alias使它更短一点。</p>
-<pre><code>alias airport=&#39;/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport&#39;
-</code></pre><p>加入wifi</p>
-<pre><code>networksetup -setairportnetwork &lt;网络设备名&gt; &lt;WIFI SSID&gt; &lt;WIFI PASSWORD&gt;
-</code></pre></div><div class="tags"><a href="/tags/web/">web</a></div><div class="post-nav"><a class="pre" href="/2017/05/31/傅里叶变换介绍/">傅里叶变换介绍</a></div><div id="vcomment"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'true' == true ? true : false;
+</div><div class="tags"><a href="/tags/代数/">代数</a><a href="/tags/翻译/">翻译</a></div><div class="post-nav"><a class="next" href="/2018/08/24/博客历史/">博客历史</a></div><div id="vcomment"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'true' == true ? true : false;
 var verify = 'false' == true ? true : false;
 var GUEST_INFO = ['nick','mail','link'];
 var guest_info = 'nick,mail'.split(',').filter(function(item){
@@ -71,4 +40,7 @@ if (search_path.length == 0) {
 }
 var path = '/' + search_path;
 searchFunc(path, 'local-search-input', 'local-search-result');
-</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
+</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
