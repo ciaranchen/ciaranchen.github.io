@@ -3,6 +3,26 @@
 
 
     
+  <url>
+    <loc>http://blog.ciaran.cn/2017/10/25/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84and%E4%BA%8C%E7%BB%B4%E6%8C%87%E9%92%88/</loc>
+    <lastmod>2018-09-16T17:24:59.573Z</lastmod>
+    <data>
+        <display>
+        <title>二维数组&二维指针</title>
+        <pubTime>2017-10-25T12:18:29.000Z</pubTime>
+        
+        <tag>C/C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="其它" url="http://blog.ciaran.cn/categories/%E5%85%B6%E5%AE%83/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://blog.ciaran.cn/2018/09/16/ipython%E5%AE%89%E8%A3%85%E7%89%B9%E5%AE%9A%E7%89%88%E6%9C%ACkernel/</loc>
@@ -753,26 +773,6 @@
         <pubTime>2018-02-15T10:33:33.000Z</pubTime>
         
         <tag>LaTeX</tag>
-         
-         
-           
-             
-              <breadCrumb title="其它" url="http://blog.ciaran.cn/categories/%E5%85%B6%E5%AE%83/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.ciaran.cn/2017/10/25/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84&%E4%BA%8C%E7%BB%B4%E6%8C%87%E9%92%88/</loc>
-    <lastmod>2018-08-26T03:12:30.356Z</lastmod>
-    <data>
-        <display>
-        <title>二维数组&二维指针</title>
-        <pubTime>2017-10-25T12:18:29.000Z</pubTime>
-        
-        <tag>C/C++</tag>
          
          
            
