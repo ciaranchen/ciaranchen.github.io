@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://blog.ciaran.cn/2018/08/04/%E7%BA%BF%E6%80%A7%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%EF%BC%88%E4%B8%8A%EF%BC%89/</loc>
+    <lastmod>2018-09-20T04:21:21.710Z</lastmod>
+    <data>
+        <display>
+        <title>线性最小二乘（上）</title>
+        <pubTime>2018-08-04T09:36:42.000Z</pubTime>
+        
+        <tag>数值计算</tag>
+         
+         
+           
+             
+              <breadCrumb title="数学" url="http://blog.ciaran.cn/categories/%E6%95%B0%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ciaran.cn/2018/09/16/ipython%E5%AE%89%E8%A3%85%E7%89%B9%E5%AE%9A%E7%89%88%E6%9C%ACkernel/</loc>
     <lastmod>2018-09-16T18:07:59.173Z</lastmod>
     <data>
@@ -784,26 +804,6 @@
 
     
     
-    
-  <url>
-    <loc>http://blog.ciaran.cn/2018/08/04/%E7%BA%BF%E6%80%A7%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%EF%BC%88%E4%B8%8A%EF%BC%89/</loc>
-    <lastmod>2018-08-26T01:27:25.064Z</lastmod>
-    <data>
-        <display>
-        <title>线性最小二乘（上）</title>
-        <pubTime>2018-08-04T09:36:42.000Z</pubTime>
-        
-        <tag>数值计算</tag>
-         
-         
-           
-             
-              <breadCrumb title="数学" url="http://blog.ciaran.cn/categories/%E6%95%B0%E5%AD%A6/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://blog.ciaran.cn/2017/06/21/%E7%82%89%E7%9F%B3%E4%BC%A0%E8%AF%B4%E9%A2%98/</loc>
