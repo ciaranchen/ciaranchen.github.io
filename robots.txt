@@ -10,5 +10,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: http://www.hunao.info/sitemap.xml
-Sitemap: http://www.hunao.info/baidusitemap.xml
+Sitemap: http://blog.ciaran.cn/sitemap.xml
+Sitemap: http://blog.ciaran.cn/baidusitemap.xml
