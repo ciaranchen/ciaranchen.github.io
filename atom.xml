@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ciaran.cn/"/>
-  <updated>2018-11-12T17:00:38.498Z</updated>
+  <updated>2018-12-01T10:34:15.812Z</updated>
   <id>http://blog.ciaran.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>send 和 sendto 的区别</title>
+    <link href="http://blog.ciaran.cn/2018/11/29/Linux-Socket%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://blog.ciaran.cn/2018/11/29/Linux-Socket源码阅读/</id>
+    <published>2018-11-29T14:21:27.000Z</published>
+    <updated>2018-12-01T10:34:15.812Z</updated>
+    
+    <content type="html"><![CDATA[<p>大概需要重新学习一下使用Socket，然后发现了一些诡异的现象，于是写博客记录一下这些诡异的情况发生的原因。大概会出现以下的问题：</p><ol><li>send 和 sendto 有什么区别？</li><li>UDP socket能否使用connect？</li></ol><h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1><p>首先<code>Socket</code>在Linux 源码的位置是<code>net/socket.c</code>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;大概需要重新学习一下使用Socket，然后发现了一些诡异的现象，于是写博客记录一下这些诡异的情况发生的原因。大概会出现以下的问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;send 和 sendto 有什么区别？&lt;/li&gt;
+&lt;li&gt;UDP
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>简单sqlmap注入</title>
@@ -109,11 +136,11 @@
       <category term="信息安全" scheme="http://blog.ciaran.cn/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="source code" scheme="http://blog.ciaran.cn/tags/source-code/"/>
-    
       <category term="Mirai" scheme="http://blog.ciaran.cn/tags/Mirai/"/>
     
       <category term="scanner" scheme="http://blog.ciaran.cn/tags/scanner/"/>
+    
+      <category term="source code" scheme="http://blog.ciaran.cn/tags/source-code/"/>
     
   </entry>
   
@@ -192,9 +219,9 @@
       <category term="数学" scheme="http://blog.ciaran.cn/categories/%E6%95%B0%E5%AD%A6/"/>
     
     
-      <category term="代数" scheme="http://blog.ciaran.cn/tags/%E4%BB%A3%E6%95%B0/"/>
-    
       <category term="翻译" scheme="http://blog.ciaran.cn/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="代数" scheme="http://blog.ciaran.cn/tags/%E4%BB%A3%E6%95%B0/"/>
     
   </entry>
   
@@ -478,26 +505,6 @@
     
     
       <category term="LaTeX" scheme="http://blog.ciaran.cn/tags/LaTeX/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>chibi-scheme使用</title>
-    <link href="http://blog.ciaran.cn/2018/02/08/chibi-scheme%E4%BD%BF%E7%94%A8/"/>
-    <id>http://blog.ciaran.cn/2018/02/08/chibi-scheme使用/</id>
-    <published>2018-02-08T12:20:37.000Z</published>
-    <updated>2018-08-26T03:34:27.952Z</updated>
-    
-    <content type="html"><![CDATA[<excerpt in="" index="" |="" 首页摘要=""><p>这只是一个小短篇，介绍一下<code>chibi-scheme</code>的使用（在C语言里进行编程）。其中很多都是直接翻译的官方文档原文。</p><a id="more"></a><the rest="" of="" contents="" |="" 余下全文=""><h2 id="make"><a href="#make" class="headerlink" title="make"></a>make</h2><p>安装chibi-schem的方式很简单。就是从github上面获得源码之后<code>make</code>即可。</p><p>然后将会得到一个名为<code>chibi-run</code>的二进制文件。运行它，这就是一个chibi-scheme的解释器了。</p><h2 id="C-FFI"><a href="#C-FFI" class="headerlink" title="C FFI"></a>C FFI</h2><p>chibi-scheme是用C完成的，在其中函数声明时带有SEXP_API字样的，就是chibi-scheme提供给C调用的API。</p><p>要将chibi-scheme安装到系统默认的路径中，使用<code>make install</code>。</p><p>要在C中执行chibi-scheme，需要包含头文件：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chibi/eval.h&gt;</span></span></span><br></pre></td></tr></table></figure><p>且在编译的时候，加上chibi-scheme这个库的引用，比如下面这样：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o test_chibi test_chibi.c -L. -lchibi-scheme</span><br></pre></td></tr></table></figure><h2 id="使用chibi-scheme的上下文变量"><a href="#使用chibi-scheme的上下文变量" class="headerlink" title="使用chibi-scheme的上下文变量"></a>使用chibi-scheme的上下文变量</h2><p>要执行chibi-scheme相关的内容，首先得创建一个chibi-scheme的上下文变量，当然在最后使用之后还要把它删除掉：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">    sexp ctx;</span><br><span class="line">    ctx = sexp_make_eval_context(<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// your code here ...</span></span><br><span class="line">    sexp_destroy_context(ctx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用<code>sexp_load_standard_env</code>加载标准参数env，从预编译的默认值构造特征列表，并加载已安装的初始化文件给version（ 应该是该值SEXP_SEVEN），同时创建一个interaction-environment参数并将该参数设置为env本身。</p><p>使用<code>sexp_load_standard_ports</code>，来从标准的输入输出错误流中获得current-xxxx-port参数，并将他们与env绑定。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sexp_load_standard_env(ctx, <span class="literal">NULL</span>, SEXP_SEVEN);</span><br><span class="line">sexp_load_standard_ports(ctx, <span class="literal">NULL</span>, <span class="built_in">stdin</span>, <span class="built_in">stdout</span>, <span class="built_in">stderr</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure><h2 id="执行语句"><a href="#执行语句" class="headerlink" title="执行语句"></a>执行语句</h2><p>这之后可以使用已经创建好的上下文变量来声明一些变量了。如同之前我们说的gc里面讲的，我们首先需要声明一些变量，然后声明它们收到保护，然后在函数的最后再把对它们的保护进行移除。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dostuff</span><span class="params">(sexp ctx)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* declare and preserve local variables */</span></span><br><span class="line">    sexp_gc_var2(obj1, obj2);</span><br><span class="line">    sexp_gc_preserve2(ctx, obj1, obj2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// your code here ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* release the local variables */</span></span><br><span class="line">    sexp_gc_release2(ctx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后是在里面可以通过<code>sexp_load</code>加载一个.scm文件的代码，干脆自己手写一行代码并执行，还可以通过手动构造一个表达式来运行他。(这里的代码来源于文档）</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* load a file containing Scheme code */</span></span><br><span class="line">obj1 = sexp_c_string(ctx, <span class="string">"/path/to/source/file.scm"</span>, <span class="number">-1</span>);</span><br><span class="line">sexp_load(ctx, obj1, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* eval a C string as Scheme code */</span></span><br><span class="line">sexp_eval_string(ctx, <span class="string">"(some scheme expression)"</span>, <span class="number">-1</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* construct a Scheme expression to eval */</span></span><br><span class="line">obj1 = sexp_intern(ctx, <span class="string">"my-procedure"</span>, <span class="number">-1</span>);</span><br><span class="line">obj2 = sexp_cons(ctx, obj1, SEXP_NULL);</span><br><span class="line">sexp_eval(ctx, obj2, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure><h1 id="输出语句"><a href="#输出语句" class="headerlink" title="输出语句"></a>输出语句</h1><p>上面的例子不会给出结果，因为没有调用输出的函数，文档中只说可以在堆栈中看到结果。下面给出在窗口中输出的例子如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* eval a C string as Scheme code */</span></span><br><span class="line">obj1 = sexp_eval_string(ctx, <span class="string">"(current-output-port)"</span>, <span class="number">-1</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">// obj1 现在是一个输出流</span></span><br><span class="line">obj2 = sexp_eval_string(ctx, <span class="string">"(+ 3 2)"</span>, <span class="number">-1</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">// obj2 现在是你语句的执行结果</span></span><br><span class="line">sexp_write(ctx, obj2, obj1);</span><br><span class="line"><span class="comment">// 输出语句执行结果到输出流</span></span><br></pre></td></tr></table></figure><p>编译运行后结果如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -o test_chibi test_chibi.c -L. -lchibi-scheme &amp;&amp; ./test_chibi</span><br><span class="line">5</span><br></pre></td></tr></table></figure><p>这个例子的代码参见<a href="https://gist.coding.net/u/feanor/5cd32e64c3944a1db757fa16b20928ec" target="_blank" rel="noopener">这里</a></p></the></excerpt>]]></content>
-    
-    <summary type="html">
-    
-      &lt;excerpt in=&quot;&quot; index=&quot;&quot; |=&quot;&quot; 首页摘要=&quot;&quot;&gt;
-
-&lt;p&gt;这只是一个小短篇，介绍一下&lt;code&gt;chibi-scheme&lt;/code&gt;的使用（在C语言里进行编程）。其中很多都是直接翻译的官方文档原文。&lt;/p&gt;
-    
-    </summary>
-    
     
   </entry>
   
