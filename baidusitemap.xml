@@ -4,19 +4,29 @@
 
     
   <url>
-    <loc>http://blog.ciaran.cn/2018/11/29/Linux-Socket%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2018-12-01T10:34:15.812Z</lastmod>
+    <loc>http://blog.ciaran.cn/2019/02/28/%E5%AD%90%E4%B8%8D%E9%81%93%E7%88%B6%E4%B9%8B%E8%BF%87%E5%87%BA%E5%A4%84%E8%80%83/</loc>
+    <lastmod>2019-02-28T16:18:14.735Z</lastmod>
     <data>
         <display>
-        <title>send 和 sendto 的区别</title>
-        <pubTime>2018-11-29T14:21:27.000Z</pubTime>
+        <title>子不道父之过出处考</title>
+        <pubTime>2019-02-28T15:58:06.000Z</pubTime>
         
+        <tag>闲谈</tag>
+         
+        <tag>古文</tag>
+         
+        <tag>水</tag>
+         
          
            
+             
+              <breadCrumb title="扯淡" url="http://blog.ciaran.cn/categories/%E6%89%AF%E6%B7%A1/"/>
+          
         </display>
     </data>
     </url>
 
+    
     
   <url>
     <loc>http://blog.ciaran.cn/2018/11/13/%E7%AE%80%E5%8D%95%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/</loc>
@@ -468,9 +478,9 @@
         <title>敏感性分析</title>
         <pubTime>2018-09-15T05:33:08.000Z</pubTime>
         
-        <tag>翻译</tag>
-         
         <tag>代数</tag>
+         
+        <tag>翻译</tag>
          
          
            
@@ -490,9 +500,9 @@
         <title>数值线性代数1</title>
         <pubTime>2017-12-05T12:46:29.000Z</pubTime>
         
-        <tag>翻译</tag>
-         
         <tag>代数</tag>
+         
+        <tag>翻译</tag>
          
          
            

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ciaran.cn/"/>
-  <updated>2018-12-01T10:34:15.812Z</updated>
+  <updated>2019-02-28T16:18:14.735Z</updated>
   <id>http://blog.ciaran.cn/</id>
   
   <author>
@@ -17,13 +17,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>send 和 sendto 的区别</title>
-    <link href="http://blog.ciaran.cn/2018/11/29/Linux-Socket%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    <id>http://blog.ciaran.cn/2018/11/29/Linux-Socket源码阅读/</id>
-    <published>2018-11-29T14:21:27.000Z</published>
-    <updated>2018-12-01T10:34:15.812Z</updated>
+    <title>子不道父之过出处考</title>
+    <link href="http://blog.ciaran.cn/2019/02/28/%E5%AD%90%E4%B8%8D%E9%81%93%E7%88%B6%E4%B9%8B%E8%BF%87%E5%87%BA%E5%A4%84%E8%80%83/"/>
+    <id>http://blog.ciaran.cn/2019/02/28/子不道父之过出处考/</id>
+    <published>2019-02-28T15:58:06.000Z</published>
+    <updated>2019-02-28T16:18:14.735Z</updated>
     
-    <content type="html"><![CDATA[<p>大概需要重新学习一下使用Socket，然后发现了一些诡异的现象，于是写博客记录一下这些诡异的情况发生的原因。大概会出现以下的问题：</p><ol><li>send 和 sendto 有什么区别？</li><li>UDP socket能否使用connect？</li></ol><h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1><p>首先<code>Socket</code>在Linux 源码的位置是<code>net/socket.c</code>。</p>]]></content>
+    <content type="html"><![CDATA[<p>饭桌上谈到祖辈受教育时听到的《三字经》中有一句 <code>子不道，父之过</code> ，意思是”子辈的不应该说出父辈的过错”。说实话这让我感到困惑和些许不自在，所以我开始了对这个句话内容的一次求证。</p><p>然后写到这篇博客的原因是发现关于这句话，网络上的说法似乎并不准确，于是希望能做一个追本溯源的根据，仅此而已。</p><h2 id="子不教-父之过"><a href="#子不教-父之过" class="headerlink" title="子不教 父之过"></a>子不教 父之过</h2><p>《三字经》中是有与之相似的这么一句话。我记得的版本是这样的</p><blockquote><p>子不教，父之过。教不严，师之惰。</p></blockquote><p>意思是：子辈没有受到教育，这是父亲的过错。教育学生不严格要求，这就是做老师的懒惰了。</p><p>这句话有的版本是</p><blockquote><p>养不教，父之过。教不严，师之惰。</p></blockquote><p>意思是：生养孩子却不加教育，这是父亲的过错。教育学生不严格要求，这就是做老师的懒惰了。</p><h2 id="子不言父过"><a href="#子不言父过" class="headerlink" title="子不言父过"></a>子不言父过</h2><p>然后我再去查证这个<code>子不道父之过</code>的来源，没有什么办法。只有在百度引擎上查找，找到了“俗话说”的几个版本：</p><p>俗语：</p><blockquote><p>子不言父过，女不道母奸</p></blockquote><p>意思是：子女不去说父亲的过错，儿女不去说母亲的取巧。</p><p><a href="https://ctext.org/fengshen-yanyi/zhs" target="_blank" rel="noopener">封神演义</a> <a href="https://ctext.org/fengshen-yanyi/60/zhs#n286748" target="_blank" rel="noopener">六十回 马元下山助殷洪</a>：</p><blockquote><p>殷洪曰：“老师在上，容弟子一言告禀：殷洪乃纣王之子，怎的反助武王。古云：‘子不言父过。’况敢从反叛而弑父哉。即人神仙佛，不过先完纲常彝伦，方可言其冲举。又云：‘未修仙道，先修人道。人道未完，仙道远矣。’且老师之教弟子，且不论证佛成仙，亦无有教人有逆伦弑父之子。即以此奉告老师，老师当何以教我？”</p></blockquote><p><a href="https://ctext.org/fengshen-yanyi/zhs" target="_blank" rel="noopener">封神演义</a> <a href="https://ctext.org/fengshen-yanyi/68/zhs#n286903" target="_blank" rel="noopener">六十八回 首阳山夷齐阻兵</a>：</p><blockquote><p>夷、齐曰：“臣闻‘子不言父过，臣不彰君恶’。故父有诤子，君有诤臣。只闻以德而感君，未闻以下而伐上者。今纣王，君也，虽有不德，何不倾城尽谏，以尽臣节，亦不失为忠耳。况先王以服事殷，未闻不足于汤也。臣又闻‘至德无不感通，至仁无不宾服’。苟至德至仁在我，何凶残不化为淳良乎！以臣愚见，当退守臣节，体先王服事之诚，守千古君臣之分，不亦善乎。”</p></blockquote><p>也就是 <code>子不言父过，臣不彰君恶</code> ，意思是：儿子不说父亲的过失,臣子不暴露君王的缺点。</p><p><a href="https://ctext.org/wiki.pl?if=gb&amp;res=773626&amp;remap=gb" target="_blank" rel="noopener">南疆绎史勘本卷十六</a> <a href="(https://ctext.org/wiki.pl?if=gb&amp;chapter=635022&amp;remap=gb#p16">黄端伯</a>)：</p><blockquote><p>王问：弘光何君？曰：「圣君」。问何以指昏为圣？曰：「子不言父过」。</p></blockquote><p><a href="https://zhidao.baidu.com/question/185460071" target="_blank" rel="noopener">出处不明的</a>：</p><blockquote><p>子不言父过,女不擦母艳</p></blockquote><p>儿子不许讨论父亲的过错，女儿梳妆打扮不能僭越母亲。</p><h2 id="关于《礼记》"><a href="#关于《礼记》" class="headerlink" title="关于《礼记》"></a>关于《礼记》</h2><p>在搜索引擎上有很多的结果（包括<a href="https://www.zhihu.com/question/24023155" target="_blank" rel="noopener">知乎</a>）中也提到这句话出自《礼记》，甚至还说明了这句话的前一句是<code>父不言子德</code>，但是具体出自《礼记》的哪一节，却是没有提到过。</p><p>于是尝试在<a href="https://ctext.org/zhs" target="_blank" rel="noopener">中国哲学书电子化计划</a>中检索了这句话，但是<a href="https://ctext.org/liji/zhs?searchu=%E5%AD%90%E4%B8%8D%E8%A8%80%E7%88%B6%E8%BF%87" target="_blank" rel="noopener">没有找到结果</a>。为了确保结果的正确，还到<a href="http://www.njmuseum.com/html/default.html" target="_blank" rel="noopener">南京博物馆</a>下的<a href="(http://www.njmuseum.com/rbbook/gb/htm_search/search_13.asp">十三经检索</a>)中也检索了这句话，还是没有找到结果。</p><p>于是我认为《礼记》中没有这句话的相关内容。网上关于这句话的讨论是谬传了。</p><p>而这样的话出自《礼记》的说法，所能见到的流传最多的就是<code>百度知道</code>。（又是你啊百度）</p><p>于是尝试在百度知道检索了一下，所能发现的最早说出这句话出自《礼记》的，应该是这个回答<a href="https://zhidao.baidu.com/question/234394619.html?fr=iks&amp;word=%D7%D3%B2%BB%D1%D4%B8%B8%B9%FD&amp;ie=gbk" target="_blank" rel="noopener">外人面前，父不夸子，子不批父，出自哪里？</a>。此后这句话便都是从《礼记》出来的了，甚至有人能说出它的上一句是<code>父不言子之德</code>。</p><h2 id="子不言父之过"><a href="#子不言父之过" class="headerlink" title="子不言父之过"></a>子不言父之过</h2><p>但是这句话是出自何处呢？通过将网传的上一句<code>父不言子德</code>进行检索，发现了谷歌图书中扫描的<a href="https://books.google.com.hk/books?id=qJ5PBAAAQBAJ&amp;pg=PT86&amp;lpg=PT86&amp;dq=%E7%88%B6%E4%B8%8D%E8%A8%80%E5%AD%90%E5%BE%B7&amp;source=bl&amp;ots=ryb_WFJd-7&amp;sig=ACfU3U3buFSZFNoeUvqxQIbtMTDddynLyA&amp;hl=zh-CN&amp;sa=X&amp;ved=2ahUKEwiDwc3178bgAhVbwIsBHRMKAiUQ6AEwCHoECAUQAQ#v=onepage&amp;q=%E7%88%B6%E4%B8%8D%E8%A8%80%E5%AD%90%E5%BE%B7&amp;f=false" target="_blank" rel="noopener">明心寶鑑</a>中有这样的一段：</p><blockquote><p>父不言子之德，子不言父之过。</p></blockquote><p>这段话在 《明心寶鑑》的 <code>遵禮篇 第十六 凡二十一條</code> 一节中，而这段话具体引用自哪里并不明确。</p><p>以下是维基百科对此书的介绍</p><blockquote><p>《<strong>明心寶鑑</strong>》大约成书于元末明初，辑录者或整理者是范立本。全书由20篇、六七百段文字组成，全書內容皆出自《<a href="https://www.wikiwand.com/zh/%E5%B0%9A%E6%9B%B8" target="_blank" rel="noopener">尚書</a>》、《<a href="https://www.wikiwand.com/zh/%E6%98%93%E7%B6%93" target="_blank" rel="noopener">易經</a>》、《<a href="https://www.wikiwand.com/zh/%E8%A9%A9%E7%B6%93" target="_blank" rel="noopener">詩經</a>》、《<a href="https://www.wikiwand.com/zh/%E7%A6%AE%E8%A8%98" target="_blank" rel="noopener">禮記</a>》、《<a href="https://www.wikiwand.com/zh/%E8%AB%96%E8%AA%9E" target="_blank" rel="noopener">論語</a>》、《<a href="https://www.wikiwand.com/zh/%E5%AD%9F%E5%AD%90" target="_blank" rel="noopener">孟子</a>》、《<a href="https://www.wikiwand.com/zh/%E8%8E%8A%E5%AD%90" target="_blank" rel="noopener">莊子</a>》、《<a href="https://www.wikiwand.com/zh/%E5%A4%AA%E4%B8%8A%E6%84%9F%E6%87%89%E7%AF%87" target="_blank" rel="noopener">太上感應篇</a>》、《<a href="https://www.wikiwand.com/zh/%E8%AA%AA%E8%8B%91" target="_blank" rel="noopener">說苑</a>》、《<a href="https://www.wikiwand.com/zh/%E9%A1%8F%E6%B0%8F%E5%AE%B6%E8%A8%93" target="_blank" rel="noopener">顏氏家訓</a>》、 《景行錄》等中國歷代經典中的格言、警句，雜糅儒、釋、道三教學說，薈萃<a href="https://www.wikiwand.com/zh/%E5%AD%94%E5%AD%90" target="_blank" rel="noopener">孔子</a>、<a href="https://www.wikiwand.com/zh/%E5%AD%9F%E5%AD%90" target="_blank" rel="noopener">孟子</a>、<a href="https://www.wikiwand.com/zh/%E8%8D%80%E5%AD%90" target="_blank" rel="noopener">荀子</a>、<a href="https://www.wikiwand.com/zh/%E8%80%81%E5%AD%90" target="_blank" rel="noopener">老子</a>、<a href="https://www.wikiwand.com/zh/%E8%8E%8A%E5%AD%90" target="_blank" rel="noopener">莊子</a>、<a href="https://www.wikiwand.com/zh/%E6%9C%B1%E7%86%B9" target="_blank" rel="noopener">朱熹</a>等先聖前賢有關個人品德修養、安身立命的論述精華。明朝以後，此書即為通俗讀物，也是最受歡迎的勸善書、啟蒙書之一。它除了是中國最古老的勸善書、啟蒙書之一，也是風行東亞、東南亞<a href="https://www.wikiwand.com/zh/%E6%BC%A2%E5%AD%97%E6%96%87%E5%8C%96%E5%9C%88" target="_blank" rel="noopener">漢字文化圈</a>600多年的修身勵志經典。《明心寶鑑》普遍流行於朝鲜<a href="https://www.wikiwand.com/zh/%E6%9D%8E%E6%9C%9D" target="_blank" rel="noopener">李朝</a>时代，且有「抄」之出現。《明心寶鑑》至今仍是韓國學習漢文者軎愛的古典良書之一。傳入日本的《明心寶鑑》，最早為1631年中野道伴的刻本。幕府儒臣<a href="https://www.wikiwand.com/zh/%E6%9E%97%E7%BE%85%E5%B1%B1" target="_blank" rel="noopener">林羅山</a>所使用的《明心寶鑑》的版本，就是朝鮮刊行的清州本《明心寶鑑》(1454年刊行)。日本<a href="https://www.wikiwand.com/zh/%E6%B1%9F%E6%88%B6" target="_blank" rel="noopener">江戶</a>時代，編纂引用了《明心寶鑑》條文的書籍被作為教訓書為人們所接受，这些啟蒙書或將《明心寶鑑》部分照抄，或仿照此書作成，亦或從多處引用而成，可見此書於日本之影響巨大。</p></blockquote><p><a href="http://culture.people.com.cn/GB/22219/5347386.html" target="_blank" rel="noopener">这样的一本书，居然曾经在国内失传</a>。</p><p><a href="https://ctext.org/zhs" target="_blank" rel="noopener">中国哲学书电子化计划</a>中收录了<a href="https://ctext.org/searchbooks.pl?if=gb&amp;searchu=%E6%98%8E%E5%BF%83%E5%AF%B6%E9%91%91" target="_blank" rel="noopener">谷歌图书的版本</a>。详细的来源是<code>哈佛燕京图书馆</code>。其中关于那句话的内容是</p><blockquote><p>父不言子之德，子不言父之過。</p></blockquote><p>在扫描的文字版本的<a href="https://ctext.org/wiki.pl?if=gb&amp;chapter=523440#p771" target="_blank" rel="noopener">770行</a>可以看到这句话。</p><p>在国内能找到的版本有两种：<code>华艺出版社</code> 和 <code>东方出版社</code>的版本。</p><p>华艺出版社版本出版于2007年1月连带注释如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">父不言子之德，子不言父之过。</span><br><span class="line">  父亲不说子女的德行，子女不谈父亲的过错。</span><br></pre></td></tr></table></figure><p>东方出版社版本出版于2014年5月连带注释如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">原典16-16</span><br><span class="line">父不言子之恶，子不言父之过</span><br><span class="line">译文</span><br><span class="line">父亲不说子女的不好之处，子女不谈父亲的过错。</span><br></pre></td></tr></table></figure><p><code>恶</code> 和 <code>德</code> 完全就是两个相反的词了啊。华艺出版社版本是西班牙带出的双语手抄本，而东方出版社的是中国国家图书馆内的藏本，因此会出现不同。若按照网上最多出现次数的版本，还是前者较多。</p><p>但是翻译，我想倒还是以<a href="https://www.zhihu.com/question/24023155" target="_blank" rel="noopener">知乎的网友所说</a>比较能认同。因为前一句既然是父辈对于子辈的关系的话，相对应的言应该是“宣扬”。若非说这是一句就算有错也不能指出的话，那倒是真的对传统文化的抹黑了。</p>]]></content>
     
     <summary type="html">
     
@@ -31,15 +31,20 @@
       
         
         
-          &lt;p&gt;大概需要重新学习一下使用Socket，然后发现了一些诡异的现象，于是写博客记录一下这些诡异的情况发生的原因。大概会出现以下的问题：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;send 和 sendto 有什么区别？&lt;/li&gt;
-&lt;li&gt;UDP
+          &lt;p&gt;饭桌上谈到祖辈受教育时听到的《三字经》中有一句 &lt;code&gt;子不道，父之过&lt;/code&gt;
         
       
     
     </summary>
     
+      <category term="扯淡" scheme="http://blog.ciaran.cn/categories/%E6%89%AF%E6%B7%A1/"/>
+    
+    
+      <category term="闲谈" scheme="http://blog.ciaran.cn/tags/%E9%97%B2%E8%B0%88/"/>
+    
+      <category term="古文" scheme="http://blog.ciaran.cn/tags/%E5%8F%A4%E6%96%87/"/>
+    
+      <category term="水" scheme="http://blog.ciaran.cn/tags/%E6%B0%B4/"/>
     
   </entry>
   
@@ -219,9 +224,9 @@
       <category term="数学" scheme="http://blog.ciaran.cn/categories/%E6%95%B0%E5%AD%A6/"/>
     
     
-      <category term="翻译" scheme="http://blog.ciaran.cn/tags/%E7%BF%BB%E8%AF%91/"/>
-    
       <category term="代数" scheme="http://blog.ciaran.cn/tags/%E4%BB%A3%E6%95%B0/"/>
+    
+      <category term="翻译" scheme="http://blog.ciaran.cn/tags/%E7%BF%BB%E8%AF%91/"/>
     
   </entry>
   
