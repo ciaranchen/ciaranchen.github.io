@@ -7,43 +7,15 @@
     </url>
     
     <url>
-        <loc>http://blog.ciaran.cn/Linux-Socket%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB.html</loc>
-        <lastmod>2019-02-28T15:56:27.301Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://blog.ciaran.cn/Virtalbox%E5%AE%89%E8%A3%85Mininet%E8%99%9A%E6%8B%9F%E6%9C%BA.html</loc>
-        <lastmod>2018-11-12T16:47:50.291Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://blog.ciaran.cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BAjupyter%E6%9C%8D%E5%8A%A1%E5%99%A8.html</loc>
-        <lastmod>2018-11-09T09:05:46.750Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://blog.ciaran.cn/%E5%8D%9A%E5%AE%A2%E5%8E%86%E5%8F%B22.html</loc>
-        <lastmod>2018-11-08T14:07:43.042Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
         <loc>http://blog.ciaran.cn/about/</loc>
-        <lastmod>2018-10-24T09:14:17.111Z</lastmod>
+        <lastmod>2020-11-18T14:09:21.929Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://blog.ciaran.cn/README.html</loc>
-        <lastmod>2018-08-26T03:07:24.991Z</lastmod>
+        <loc>http://blog.ciaran.cn/404/SVM%E9%80%9F%E8%A7%881.html</loc>
+        <lastmod>2019-04-22T06:56:34.911Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -51,13 +23,6 @@
     <url>
         <loc>http://blog.ciaran.cn/tags/</loc>
         <lastmod>2018-08-03T14:34:19.623Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://blog.ciaran.cn/concurrent-erlang.html</loc>
-        <lastmod>2018-08-03T14:34:19.610Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
