@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="我随便写，你随便看。"><title>Gentoo 系统安装(1) | Ciaran Chen 的博客</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script src="https://www.googletagmanager.com/gtag/js?id=UA-125805814-1" async></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-125805814-1');
+</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?' + '264aaaa76ee702a5b65385936f19abeb';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();</script><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Gentoo 系统安装(1)</h1><a id="logo" href="/.">Ciaran Chen 的博客</a><p class="description">随便写写。</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Gentoo 系统安装(1)</h1><div class="post-meta">2017-10-03<span> | </span><span class="category"><a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="post-content"><p>&lt;Excerpt in index | 首页摘要&gt;<br>近几天在姐姐的指导下安装Gentoo系统。这其实是很复杂的学问。我怕我会忘记很多东西，所以打算整理一下，放到这个博客里。</p>
+<span id="more"></span>
+<p>机子上原本是Win10，抹去了系统后，硬件如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">电脑型号: 神舟 CN15S 笔记本电脑</span><br><span class="line"></span><br><span class="line">  处理器: 英特尔 Core i7-6700HQ @ 2.60GHz 四核</span><br><span class="line">    主板: Notebook N15_17RF</span><br><span class="line">    内存: 8 GB ( 英睿达 DDR3L 1600MHz )</span><br><span class="line">  主硬盘: 日立 HGST HTS721010A9E630 ( 1 TB / 7200 转/分 )</span><br><span class="line">    显卡: Nvidia GeForce GTX 965M ( 2 GB )</span><br><span class="line">  显示器: 冠捷 AOC2280 2280W ( 21.7 英寸  )</span><br><span class="line">    声卡: 英特尔 High Definition Audio 控制器</span><br><span class="line">    网卡: 英特尔 Dual Band Wireless-AC 3165</span><br></pre></td></tr></table></figure>
+<p>&lt;The rest of contents | 余下全文&gt;</p>
+<p>另外还有一台Mac，用它来做安装期间查资料等的工作。</p>
+<p>首先是制作Gentoo启动盘</p>
+<h2 id="制作启动盘"><a href="#制作启动盘" class="headerlink" title="制作启动盘"></a>制作启动盘</h2><p>这个地方做了很多次，因为中间试图换装Arch Linux。</p>
+<p>所以除了最开始在Win10上制作启动盘之外，还在Mac上面制作过。</p>
+<p>当然首先你要有个U盘。</p>
+<h3 id="Windows上制作。"><a href="#Windows上制作。" class="headerlink" title="Windows上制作。"></a>Windows上制作。</h3><ol>
+<li><p>下载<a href="https://www.gentoo.org/downloads/">Gentoo</a></p>
+<p> amd64 和 x86 对应64位机和32位机。</p>
+<p> 如果没有经验的话，建议选择live DVD。</p>
+</li>
+<li><p>使用UItraISO制作启动盘</p>
+<p> 下载一个UItraISO，打开。</p>
+<p> 选择盘符，选择下载好的iso文件。</p>
+<p> 写磁盘。</p>
+</li>
+</ol>
+<h3 id="在Mac上制作"><a href="#在Mac上制作" class="headerlink" title="在Mac上制作"></a>在Mac上制作</h3><ol>
+<li><p>下载<a href="https://www.gentoo.org/downloads/">Gentoo</a></p>
+<p> 与<code>在Win上制作</code>一样</p>
+</li>
+<li><p>使用磁盘工具抹掉U盘</p>
+<p> <code>磁盘工具.app</code>在<code>应用程序/实用工具</code>文件夹下。打开后选择你的U盘，点图标“抹掉”，格式为<code>Mac OS 扩展 (日志式)</code>，抹掉</p>
+</li>
+<li><p>unmount U盘</p>
+<p> 找出U盘文件：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil list</span><br></pre></td></tr></table></figure>
+
+<p> 可以认出你的U盘文件的标识符， 类似<code>/dev/disk2</code></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil unmountDisk /dev/disk2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写入U盘文件</p>
+<p> 将第一步下载好的iso文件写到U盘里</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=~/Downloads/livedvd-amd64-multilib-20160704.img.dmg of=/dev/rdisk2 bs=1m</span><br></pre></td></tr></table></figure>
+
+<p> 注意这里的of 文件是<strong>rdisk2</strong> 而不是disk。</p>
+<blockquote>
+<p>此前查到的有一步是需要制作img文件，但是发现没有这样的一步也是可以的.</p>
+</blockquote>
+<p> 这里可能需要一点时间，没有输出。等待着就好了。</p>
+</li>
+<li><p>拔出U盘</p>
+<p> 在上一步结束后，可能弹出窗口提示无法读取U盘，只要选择推出即可。</p>
+<p> 否则直接：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil eject /dev/disk2</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>讲道理的话，直接拔也可以</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="UEFI启动"><a href="#UEFI启动" class="headerlink" title="UEFI启动"></a>UEFI启动</h2><p>进到电脑BIOS选单，把safe boot关掉，然后选择从U盘启动。</p>
+<p>各个型号的电脑BIOS的方式不一样，因此此处从略。</p>
+<blockquote>
+<p>我的神舟电脑是F2或F7</p>
+</blockquote>
+<p>在启动之后，就能见到一个有图形界面的Gentoo了。随便选择一个图形界面，然后Login登陆进去，就可以体验到Gentoo的样子了。但是这实际还是在启动盘的系统上，所以我们其实还是需要在终端下继续进行我们接下来的操作。</p>
+<p>在终端里的时候直接输入<code>sudo su</code>登陆到root用户。因为我们经常需要更高的权限来做安装系统的相关工作。</p>
+<h2 id="使用SSH连接-Optional"><a href="#使用SSH连接-Optional" class="headerlink" title="使用SSH连接(Optional)"></a>使用SSH连接(Optional)</h2><p>这是因为我需要粘贴 路姐 给我的代码，所以我需要一个SSH来连到Gentoo上。</p>
+<p>首先是让Gentoo连上网络。因为我的电脑好像这方面比较奇怪，所以既尝试了有限连接又尝试了无线的连接。</p>
+<p>这里可以参阅<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking">Gentoo的文档</a></p>
+<blockquote>
+<p>讲道理的话，有图形界面的方式可以连接网络，但是不知道为什么我的电脑没有成功。所以还是以终端的方式进行好了。</p>
+</blockquote>
+<h3 id="有线连接-PPPOE"><a href="#有线连接-PPPOE" class="headerlink" title="有线连接 PPPOE"></a>有线连接 PPPOE</h3><blockquote>
+<p>学校有线是pppoe</p>
+</blockquote>
+<p>ip addr确认你的有线网卡：一般是以en或者eth0开头的。</p>
+<p>直接使用<code>pppoe-setup</code>指令即可。按照提示一步一步来即可，除了中途选网卡的时候和pppoe的账号密码，其他均是默认即可。</p>
+<p>结束之后pppoe-start连接pppoe。</p>
+<h3 id="无线方式连接-WPA2"><a href="#无线方式连接-WPA2" class="headerlink" title="无线方式连接 WPA2"></a>无线方式连接 WPA2</h3><blockquote>
+<p>寝室无线的加密方式是WPA2个人版。</p>
+</blockquote>
+<p>我的liveDVD版本的U盘系统里自带NetworkManager。所以在终端里输入nmtui然后选择你的Wifi登陆即可。</p>
+<p>在配置网络结束之后<code>ip addr</code>看看有否分配到ip地址</p>
+<h3 id="配置SSH服务器"><a href="#配置SSH服务器" class="headerlink" title="配置SSH服务器"></a>配置SSH服务器</h3><p>配置root用户的密码(在root用户下)。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+
+<p>启动ssh服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/sshd start</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>此时按理来说就可以在其他机子上进行访问了，但是无法用root账户进行访问。但是现在只有root账户，所以需要在 <code>/etc/ssh/ssh_config</code> 中将</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin no</span><br></pre></td></tr></table></figure>
+
+<p>后面改为yes。</p>
+<p>之后重启服务：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/sshd restart</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<p>此时可以在本机尝试进行登录。</p>
+<p>如果出现在本机登录无法成功的情况，则在<code>/etc/hosts.allow</code>中加上这么一行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sshd: &lt;你的另一台电脑的ip&gt;:ALLOW</span><br></pre></td></tr></table></figure>
+
+<h2 id="挂载文件系统"><a href="#挂载文件系统" class="headerlink" title="挂载文件系统"></a>挂载文件系统</h2><p>输入<code>lsblk</code>命令以查看磁盘</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">livecd ~ # lsblk</span><br><span class="line">NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sdb      8:16   1  14.3G  0 disk</span><br><span class="line">|-sdb4   8:20   1   270M  0 part /mnt/cdrom</span><br><span class="line">`-sdb1   8:17   1  14.3G  0 part</span><br><span class="line">loop0    7:0    0   236M  1 loop /mnt/livecd</span><br><span class="line">sda      8:0    0 931.5G  0 disk</span><br><span class="line">|-sda2   8:2    0     1K  0 part</span><br><span class="line">|-sda5   8:5    0   233G  0 part</span><br><span class="line">|-sda1   8:1    0   233G  0 part</span><br><span class="line">`-sda6   8:6    0   233G  0 part</span><br></pre></td></tr></table></figure>
+
+<p>由此可以知道sda是电脑的硬盘，而sdb是U盘。</p>
+<p>接下来打算512MB的boot、10GB的swap空间、然后留50GB空间给root，剩下全部是home的内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parted -a optimal /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p><code>parted</code>是一个拆分磁盘空间的命令行。</p>
+<p>接下来：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mklabel gpt</span><br><span class="line">unit mib</span><br><span class="line">mkpart primary 1 513</span><br><span class="line">name 1 boot</span><br><span class="line">mkpart primary 513 -1</span><br><span class="line">name 2 rootfs</span><br><span class="line">set 1 boot on</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<p>依次做了这些：</p>
+<ul>
+<li>制造一个新的<code>gpt</code>类型的磁盘标签，用于EFI启动</li>
+<li>设置默认单元为<code>mib</code></li>
+<li>将一个1到513的空间分离出来，作为主空间</li>
+<li>然后将它命名为boot</li>
+<li>将余下的所有空间分离出来，作为根目录</li>
+<li>然后设置从主分区启动</li>
+<li>退出parted</li>
+</ul>
+<p>在退出前输入<code>print</code>命令，以检查实际的情况。如果一切正常，你的输出应该类似这样：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(parted) print</span><br><span class="line">Model: ATA HGST HTS721010A9 (scsi)</span><br><span class="line">Disk /dev/sda: 953870MiB</span><br><span class="line">Sector size (logical/physical): 512B/4096B</span><br><span class="line">Partition Table: gpt</span><br><span class="line">Disk Flags:</span><br><span class="line"></span><br><span class="line">Number  Start    End        Size       File system  Name    Flags</span><br><span class="line"> 1      1.00MiB  513MiB     512MiB                  boot    boot, esp</span><br><span class="line"> 2      513MiB   953869MiB  953356MiB               rootfs</span><br></pre></td></tr></table></figure>
+
+<p>设置第一个分区为FAT32文件系统</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/sda1</span><br></pre></td></tr></table></figure>
+
+<p>接下来继续划分rootfs的空间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sda2</span><br><span class="line">vgcreate vg1 /dev/sda2</span><br><span class="line">lvcreate --size 10G --name swap vg1</span><br><span class="line">lvcreate --size 50G --name root vg1</span><br><span class="line">lvcreate --extents 100%FREE --name home vg1</span><br><span class="line">ls /dev/mapper</span><br></pre></td></tr></table></figure>
+
+<p>依次做了这些：</p>
+<ul>
+<li>创造一个物理卷sda2</li>
+<li>然后利用这个物理卷创建物理卷组[^1]vg1</li>
+<li>分一个10G的逻辑卷让他名为swap</li>
+<li>分一个50G的逻辑卷让它名为root</li>
+<li>将余下的部分分一个逻辑卷，命名为home</li>
+<li>列出&#x2F;dev&#x2F;mapper</li>
+</ul>
+<p>如果一切正常，你的输出应该类似这样：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">livecd ~ # ls /dev/mapper</span><br><span class="line">control  vg1-home  vg1-root  vg1-swap</span><br></pre></td></tr></table></figure>
+
+<p>现在我们已经有了相应的盘区了，接下来要将她们挂载到我们的U盘的文件系统中以使用并操作它们。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkswap -L &quot;swap&quot; /dev/mapper/vg1-swap</span><br><span class="line">mkfs.ext4 -L &quot;root&quot; /dev/mapper/vg1-root</span><br><span class="line">mkfs.ext4 -m 0 -L &quot;home&quot; /dev/mapper/vg1-home</span><br><span class="line">swapon -v /dev/mapper/vg1-swap</span><br><span class="line">mount -v -t ext4 /dev/mapper/vg1-root /mnt/gentoo</span><br><span class="line">mkdir -v /mnt/gentoo/&#123;home,boot,boot/efi&#125;</span><br><span class="line">mount -v -t ext4 /dev/mapper/vg1-home /mnt/gentoo/home</span><br><span class="line">mount -v /dev/sda1 /mnt/gentoo/boot</span><br></pre></td></tr></table></figure>
+
+<p>这些语句做的是：</p>
+<ul>
+<li>制作swap空间的vg1-swap和ext4格式<code>vg1-root vg1-home</code></li>
+<li>将它们挂载到文件系统&#x2F;mnt目录下的相应位置。（之后将以&#x2F;mnt作为新系统的根目录。</li>
+</ul>
+<p>到这个地步文件系统是基本完成了。</p>
+<p>下一步将是开始准备编译内核的相应部分，首先需要下载编译的工具，因而也需要网络；所以如果跳过了SSH这一步的朋友，还是需要看看如何配置网络。</p>
+<h2 id="收尾的说明"><a href="#收尾的说明" class="headerlink" title="收尾的说明"></a>收尾的说明</h2><p>这往后的内容将在后面跟着。总之第一天弄的时候我是在这里结束的。</p>
+<p>其实到此为止可以直接进行关机操作了。但是为了确保你的改动写入磁盘，你最好执行<code>sync</code>指令。</p>
+<p>然后如果你足够体贴，想去确保安全，可以手动unmount你的文件系统。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">umount /mnt/gentoo/home</span><br><span class="line">umount /mnt/gentoo/boot</span><br><span class="line">umount /mnt/gentoo/</span><br></pre></td></tr></table></figure>
+
+<p>然后再进行关机。</p>
+</div><div class="tags"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul></div><div class="post-nav"><a class="pre" href="/2017/10/16/%E6%90%AD%E5%BB%BANgrok%E6%9C%8D%E5%8A%A1%E5%99%A8/">搭建Ngrok服务器</a><a class="next" href="/2017/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F/">汇编语言寻址方式</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://blog.ciaran.cn"/></form></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/img/avatar.png"/></a><p>To be a better man.</p><a class="info-icon" href="https://twitter.com/username" title="Twitter" target="_blank" style="margin-inline:5px"> <i class="fa fa-twitter-square" style="margin-inline:5px"></i></a><a class="info-icon" href="mailto:admin@domain.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/username" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a><a class="info-icon" href="/atom.xml" title="RSS" target="_blank" style="margin-inline:5px"> <i class="fa fa-rss-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E6%9C%AF/">学术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%AF%E6%B7%A1/">扯淡</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/">科学计算</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Angular/" style="font-size: 15px;">Angular</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/Plotly/" style="font-size: 15px;">Plotly</a> <a href="/tags/CORS/" style="font-size: 15px;">CORS</a> <a href="/tags/Cygwin/" style="font-size: 15px;">Cygwin</a> <a href="/tags/LaTeX/" style="font-size: 15px;">LaTeX</a> <a href="/tags/Clojure/" style="font-size: 15px;">Clojure</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/CNN/" style="font-size: 15px;">CNN</a> <a href="/tags/Mirai/" style="font-size: 15px;">Mirai</a> <a href="/tags/scanner/" style="font-size: 15px;">scanner</a> <a href="/tags/source-code/" style="font-size: 15px;">source code</a> <a href="/tags/bridge/" style="font-size: 15px;">bridge</a> <a href="/tags/NixOS/" style="font-size: 15px;">NixOS</a> <a href="/tags/OpenWrt/" style="font-size: 15px;">OpenWrt</a> <a href="/tags/OpenClash/" style="font-size: 15px;">OpenClash</a> <a href="/tags/%E9%97%B2%E8%B0%88/" style="font-size: 15px;">闲谈</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 15px;">大数据</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/lisp/" style="font-size: 15px;">lisp</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/ipython/" style="font-size: 15px;">ipython</a> <a href="/tags/jupyter/" style="font-size: 15px;">jupyter</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/%E4%BB%A3%E6%95%B0/" style="font-size: 15px;">代数</a> <a href="/tags/C-C/" style="font-size: 15px;">C/C++</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 15px;">翻译</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/%E5%8F%A4%E6%96%87/" style="font-size: 15px;">古文</a> <a href="/tags/%E6%B0%B4/" style="font-size: 15px;">水</a> <a href="/tags/Zotero/" style="font-size: 15px;">Zotero</a> <a href="/tags/javascript%EF%BC%8C-URLScheme/" style="font-size: 15px;">javascript， URLScheme</a> <a href="/tags/%E9%85%8D%E7%BD%AE/" style="font-size: 15px;">配置</a> <a href="/tags/assemble/" style="font-size: 15px;">assemble</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E6%95%B0%E6%A8%A1/" style="font-size: 15px;">数模</a> <a href="/tags/sqlmap/" style="font-size: 15px;">sqlmap</a> <a href="/tags/OllyDbg/" style="font-size: 15px;">OllyDbg</a> <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" style="font-size: 15px;">数值计算</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2024/01/15/%E5%BF%AB%E9%80%9F%E5%A4%8D%E5%88%B6Zotero%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%93%BE%E6%8E%A5/">快速复制Zotero项目的链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/24/OpenClash%E9%85%8D%E7%BD%AE/">OpenClash 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/%E6%81%A2%E5%A4%8D%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2/">恢复更新博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/NixOS%E9%85%8D%E7%BD%AE%E7%BD%91%E6%A1%A5/">NixOS 配置网桥</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/%E5%AD%90%E4%B8%8D%E9%81%93%E7%88%B6%E4%B9%8B%E8%BF%87%E5%87%BA%E5%A4%84%E8%80%83/">子不道父之过出处考</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/13/%E7%AE%80%E5%8D%95sqlmap%E6%B3%A8%E5%85%A5/">简单sqlmap注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/13/%E7%AE%80%E5%8D%95%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/">简单缓冲区溢出</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/05/Angular%E4%BD%BF%E7%94%A8Plotly%E8%AE%B0%E5%BD%95/">Angular使用Plotly记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/Mirai%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">Mirai源码阅读</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/Angular%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE%E8%B1%86%E7%93%A3API/">Angular跨域访问豆瓣API</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://de_licious.gitlab.io/physics_math_fun/" title="de_licious" target="_blank">de_licious</a><ul></ul><a href="http://www.saberismywife.com/" title="SaberDa" target="_blank">SaberDa</a><ul></ul><a href="http://www.stephenzhang.me/" title="StephenZhang" target="_blank">StephenZhang</a><ul></ul><a href="http://blog.boileryao.com/" title="Boiler Yao" target="_blank">Boiler Yao</a><ul></ul><a href="http://hilvcha.github.io/" title="Hilvcha" target="_blank">Hilvcha</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2024 <a href="/." rel="nofollow">Ciaran Chen 的博客.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">陕ICP备17013427号</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0"></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>
